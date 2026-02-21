@@ -1,6 +1,13 @@
 const fs = require("fs");
+const path = require("path");
 
-const { writeBuildTimestamp } = require("./utils");
+function writeBuildTimestamp() {
+  const continueDir = path.join(__dirname, "..", "..", "..");
+  fs.writeFileSync(
+    path.join(continueDir, "extensions/vscode", "src/.buildTimestamp.ts"),
+    `export default "${new Date().toISOString()}";\n`,
+  );
+}
 
 const esbuild = require("esbuild");
 
